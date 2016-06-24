@@ -1,5 +1,4 @@
 require 'yaml/store'
-require_relative 'task'
 class TaskManager
   attr_reader :task_database
   def initialize(task_database)
@@ -21,8 +20,10 @@ class TaskManager
     end
   end
 
+  Task = Struct.new(:id, :name, :to_do)
+
   def all
-    isolate_tasks.map{|task_details| Task.new(task_details)}
+    isolate_tasks.map{|task_details| Task.new(task_details[:id], task_details[:name], task_details[:to_do])}
   end
 
   def find(task_name)
