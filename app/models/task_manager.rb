@@ -1,38 +1,31 @@
 require_relative 'task'
 require 'yaml/store'
-
 class TaskManager
-  attr_reader :database
-
-  def initialize(database)
-    @database = database
+  attr_reader :task_database
+  def initialize(task_database)
+    @task_database = task_database
   end
 
   def create(task)
-    database.transaction do 
-      database['tasks'] ||= []
-      database['total'] ||= 0
-      database['total'] += 1
-      database['tasks'] << { "id" => database['total'], "title" => task[:title], "description" => task[:description] }
+    task_database.transaction do
+      task_database['tasks'] ||= []
+      task_database['total'] ||= 0
+      task_database['total'] += 1
+      task_database['tasks'] << {:id => task_database['total'].to_i, :title => task[:title], :to_do => task[:to_do]}
     end
   end
 
-  def raw_tasks
-    database.transaction do
-      database['tasks'] || []
+  def isolate_task_instances
+    task_database.transaction do
+      task_database['tasks'] ||= []
     end
   end
 
   def all
-    raw_tasks.map { |data| Task.new(data) }
+    isolate_task_instances.map {|task_details| Task.new(task_details)}
   end
 
-  def raw_task(id)
-    raw_tasks.find { |task| task["id"] == id }
-  end
-
-  def find(id)
-    Task.new(raw_task(id))
+  def find(task_name)
+    all.find{|task| task.title == task_name}
   end
 end
-

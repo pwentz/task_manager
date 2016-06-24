@@ -20,13 +20,13 @@ class TaskManagerApp < Sinatra::Base
     redirect '/tasks'
   end
 
-  get '/tasks/:id' do |id|
-    @task = task_manager.find(id.to_i)
+  get '/tasks/:title' do |task|
+    @task = task_manager.find(task)
     erb :show
   end
 
   def task_manager
-    database = YAML::Store.new('db/task_manager')
-    @task_manager ||= TaskManager.new(database)
+    task_database = YAML::Store.new('to_do/task_manager')
+    @manager ||= TaskManager.new(task_database)
   end
 end

@@ -1,9 +1,0 @@
----
-tasks:
-- id: 1
-  title: Pay bills
-  description: Find the bills. Pay the bills.
-- id: 2
-  title: Eat lunch
-  description: Find some lunch. Eat that shit.
-total: 2
