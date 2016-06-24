@@ -1,5 +1,5 @@
-require_relative 'task'
 require 'yaml/store'
+require_relative 'task'
 class TaskManager
   attr_reader :task_database
   def initialize(task_database)
@@ -9,23 +9,23 @@ class TaskManager
   def create(task)
     task_database.transaction do
       task_database['tasks'] ||= []
-      task_database['total'] ||= 0
-      task_database['total'] += 1
-      task_database['tasks'] << {:id => task_database['total'].to_i, :title => task[:title], :to_do => task[:to_do]}
+      task_database['tasks_left'] ||= 0
+      task_database['tasks_left'] += 1
+      task_database['tasks'] << {:id => task_database['tasks_left'], :name => task[:name], :to_do => task[:to_do]}
     end
   end
 
-  def isolate_task_instances
+  def isolate_tasks
     task_database.transaction do
       task_database['tasks'] ||= []
     end
   end
 
   def all
-    isolate_task_instances.map {|task_details| Task.new(task_details)}
+    isolate_tasks.map{|task_details| Task.new(task_details)}
   end
 
   def find(task_name)
-    all.find{|task| task.title == task_name}
+    all.find {|task| task_name == task.name}
   end
 end

@@ -1,8 +1,8 @@
 class Task
-  attr_reader :title, :to_do, :id
+  attr_reader :id,  :name,  :to_do
   def initialize(task_details)
-    @title = task_details[:title]
-    @to_do = task_details[:to_do]
     @id = task_details[:id]
+    @name = task_details[:name]
+    @to_do = task_details[:to_do]
   end
 end

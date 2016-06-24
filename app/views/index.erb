@@ -1,5 +1,5 @@
-<h3>Tasks still left to complete..</h3>
+<h4>Here are the tasks you still have to complete...</h4>
 
-<% @tasks.each do |task| %>
-  <h5><%= task.id %>: <a href="/tasks/<%= task.title %>"><%= task.title %></a></h5>
+<% @tasks.each do |task|%>
+  <h4><%= task.id %>: <a href="/tasks/<%= task.name %>"><%= task.name %></a></h4>
 <% end %>
