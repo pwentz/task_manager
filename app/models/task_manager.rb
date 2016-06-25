@@ -16,8 +16,8 @@ class TaskManager
 
   Task = Struct.new(:id, :name, :to_do)
 
-  def new_task(task)
-    Task.new(task[:id], task[:name], task[:to_do])
+  def new_task(task_details)
+    Task.new(task_details[:id], task_details[:name], task_details[:to_do])
   end
 
   def all

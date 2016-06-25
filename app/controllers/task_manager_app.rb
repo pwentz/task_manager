@@ -26,7 +26,7 @@ class TaskManagerApp < Sinatra::Base
   end
 
   def task_manager
-    task_database = YAML::Store.new("to_do/tasks")
+    task_database = YAML::Store.new("to_do/task_list")
     @manager ||= TaskManager.new(task_database)
   end
 end
