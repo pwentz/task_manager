@@ -1,8 +1,12 @@
-<h4>Here are the tasks you still have to complete...</h4>
-
-<% @tasks.each do |task|%>
-  <h4><%= task.id %>: <a href="/tasks/<%= task.name %>"><%= task.name %></a></h4>
+<% if @tasks.empty? %>
+  <h4>You need to add some tasks!</h4>
+<% else %>
+  <h4>Here are the tasks you still have to complete...</h4>
+  <% @tasks.each do |task|%>
+    <h4><%= task.id %>: <a href="/tasks/<%= task.name %>"><%= task.name %></a></h4>
+  <% end %>
 <% end %>
+
 
 
 <h6><a href="/">Back to task dashboard</a></h6>
