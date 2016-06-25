@@ -1,0 +1,7 @@
+---
+tasks:
+- !ruby/struct:TaskManager::Task
+  id: 1
+  name: Task Manager
+  to_do: hello, world!
+tasks_left: 1
