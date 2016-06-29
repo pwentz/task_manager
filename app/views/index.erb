@@ -1,13 +1,15 @@
-<% if @tasks.empty? %>
-  <h4>You need to add some tasks!</h4>
-  <h5><a href="/tasks/new">Add new task</a></h5>
-<% else %>
-  <h4>Here are the tasks you still have to complete...</h4>
-  <% @tasks.each do |task|%>
-    <h4><%= task.id %>: <a href="/tasks/<%= task.name %>"><%= task.name %></a></h4>
+<h4>Here are the tasks you still have to complete...</h4>
+<div class="list-group list-group-striped">
+  <% @tasks.each do |task| %>
+    <a href="/tasks/<%= task.id %>" class="list-group-item">
+      <h4 class="list-group-item-heading"><%= task.name %></h4>
+      <p class="list-group-item-text"><%= task.to_do %></p>
+      <a class="list-group-item-btn col-md-offset-11 btn btn-xs btn-success" href="/tasks/<%= task.id %>/edit">Edit</a>
+      <form action="/tasks/<%= task.id %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE" class="form-control">
+        <input class="list-group-item-btn col-md-offset-11 btn-xs btn-danger" type="submit" value="Delete">
+      </form>
+    </a>
   <% end %>
-<% end %>
-<h5><a href="/">Back to task dashboard</a></h5>
-
-
-
+</div>
+<a class="btn btn-info" href="/">Bask to task dashboard</a>

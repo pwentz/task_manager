@@ -1,6 +1,8 @@
 <form action="/tasks" method="post">
-  <h4>Please describe your upcoming task...</h4>
-  <input type="text" name="task[name]" placeholder="Task name..."><br/>
-  <textarea name="task[to_do]" placeholder="Description..."></textarea><br/>
-  <input type="submit" value="add to tasks">
+  <fieldset class="form-group">
+    <label for="taskName">Describe your task!</label>
+    <input class="form-control form-control-lg" type="text" name="task[name]" id="taskName" placeholder="Task name..."><br/>
+    <textarea class="form-control form-control-lg" name="task[to_do]" id="taskDescription" placeholder="Description..."></textarea><br/>
+    <input class="btn btn-success" type="submit" value="add to tasks">
+  </fieldset>
 </form>

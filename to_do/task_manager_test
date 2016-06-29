@@ -1,0 +1,7 @@
+---
+tasks:
+- !ruby/struct:TaskManager::Task
+  id: 1
+  name: Mow
+  to_do: mow the front lawn
+tasks_left: 1

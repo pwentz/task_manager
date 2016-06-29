@@ -1,6 +1,15 @@
-<h3>Welcome to the task manager! What tasks can I help you manage?</h3>
+<h3 class="text-center">Welcome to the task manager! What tasks can I help you manage?</h3>
 
-<ul>
-  <li style="margin-top:2em;"><a href="/tasks">Tasks left to complete...</a></li>
-  <li style="margin-top:2em;"><a href="/tasks/new">Add a new task</a></li>
-</ul>
+
+<div class="row">
+  <% if @tasks.empty? %>
+    <a class="col-md-2 col-md-offset-5 btn btn-primary btn-lg disabled" href="/tasks" role="button">Tasks left</a>
+  <% else %>
+    <a class="col-md-2 col-md-offset-5 btn btn-primary btn-lg" href="/tasks" role="button">Tasks left</a>
+  <% end %>
+</div>
+
+
+<p><div class="row">
+  <a class="col-md-2 col-md-offset-5 btn btn-primary btn-lg" href="/tasks/new" role="button">Add a new task</a></p>
+</div></p>

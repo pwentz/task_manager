@@ -1,8 +1,7 @@
-require 'models/task_manager'
 class TaskManagerApp < Sinatra::Base
-  set :root, File.expand_path("..", __dir__)
 
   get '/' do
+    @tasks = task_manager.all
     erb :dashboard
   end
 
@@ -20,9 +19,24 @@ class TaskManagerApp < Sinatra::Base
     redirect '/tasks'
   end
 
-  get '/tasks/:name' do
-    @task = task_manager.find(params["name"])
+  get '/tasks/:id/edit' do
+    @task = task_manager.find(params[:id].to_i)
+    erb :edit
+  end
+
+  put '/tasks/:id' do
+    task_manager.update(params[:id].to_i, params[:task])
+    redirect '/tasks'
+  end
+
+  get '/tasks/:id' do
+    @task = task_manager.find(params[:id].to_i)
     erb :show
+  end
+
+  delete '/tasks/:id' do
+    task_manager.destroy(params[:id].to_i)
+    redirect '/tasks'
   end
 
   def task_manager
