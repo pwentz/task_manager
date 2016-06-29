@@ -22,7 +22,7 @@ class TaskManagerTest < Minitest::Test
     
     task_manager.update(1, :name => "Feed")
     
-    assert_equal "Feed", task.name
-    assert_equal "mow the front lawn", task.to_do
+    assert_equal "Feed", task_manager.find(1).name
+    assert_equal "mow the front lawn", task_manager.find(1).to_do
   end
 end

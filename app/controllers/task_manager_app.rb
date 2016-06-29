@@ -19,6 +19,11 @@ class TaskManagerApp < Sinatra::Base
     redirect '/tasks'
   end
 
+  get '/tasks/:id' do
+    @task = task_manager.find(params[:id].to_i)
+    erb :show
+  end
+
   get '/tasks/:id/edit' do
     @task = task_manager.find(params[:id].to_i)
     erb :edit
@@ -29,18 +34,17 @@ class TaskManagerApp < Sinatra::Base
     redirect '/tasks'
   end
 
-  get '/tasks/:id' do
-    @task = task_manager.find(params[:id].to_i)
-    erb :show
-  end
-
   delete '/tasks/:id' do
     task_manager.destroy(params[:id].to_i)
     redirect '/tasks'
   end
 
   def task_manager
-    task_database = YAML::Store.new("to_do/task_list")
+    if ENV['RACK_ENV'] == 'test'
+      task_database = YAML::Store.new("to_do/task_list_test")
+    else
+      task_database = YAML::Store.new("to_do/task_list")
+    end
     @manager ||= TaskManager.new(task_database)
   end
 end

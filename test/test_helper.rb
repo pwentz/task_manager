@@ -1,9 +1,10 @@
 ENV['RACK_ENV'] ||= 'test'
 
 require File.expand_path('../../config/environment', __FILE__)
-
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'capybara/dsl'
+require 'launchy'
 
 module TestHelpers
   def teardown
@@ -12,8 +13,18 @@ module TestHelpers
   end
 
   def task_manager
-    database = YAML::Store.new('to_do/task_manager_test')
-    @database ||= TaskManager.new(database)
+    if ENV['RACK_ENV'] == 'test'
+      task_database = YAML::Store.new("to_do/task_list_test")
+    else
+      task_database = YAML::Store.new("to_do/task_list")
+    end
+    @manager ||= TaskManager.new(task_database)
   end
+end
 
+Capybara.app = TaskManagerApp 
+
+class FeatureTest < Minitest::Test
+  include TestHelpers
+  include Capybara::DSL
 end

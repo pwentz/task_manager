@@ -2,6 +2,10 @@
 tasks:
 - !ruby/struct:TaskManager::Task
   id: 1
-  name: Mow
-  to_do: mow the front lawn
-tasks_left: 1
+  name: coding is cool
+  to_do: I know it's cool
+- !ruby/struct:TaskManager::Task
+  id: 2
+  name: learning capybara
+  to_do: a large rodent
+tasks_left: 2

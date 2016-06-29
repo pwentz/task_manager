@@ -32,7 +32,6 @@ class TaskManager
 
   def update(id, task)
     task_database.transaction do
-      require 'pry'; binding.pry
       dated_task = task_database['tasks'].find{|task|task.id == id}
       dated_task.name = task[:name] unless task[:name].nil?
       dated_task.to_do = task[:to_do] unless task[:to_do].nil?
@@ -47,7 +46,7 @@ class TaskManager
 
   def delete_all
     task_database.transaction do
-      task_database['tasks'].delete_if{|task|task.is_a?(Task)}
+      task_database['tasks'].clear
       task_database['tasks_left'] = 0
     end
   end
